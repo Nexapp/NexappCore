@@ -1,6 +1,6 @@
 package ca.nexapp.locator;
 
-import static org.junit.Assert.assertEquals;
+import static com.google.common.truth.Truth.*;
 import static org.mockito.Mockito.mock;
 
 import org.junit.Before;
@@ -29,6 +29,6 @@ public class ServiceLocatorTest {
     public void whenRetrievingAnExistingRepositoryShouldReturnTheCorrespondingInstance() {
         Object repositoryFound = ServiceLocator.find(Object.class);
 
-        assertEquals(A_SERVICE_IMPLEMENTATION, repositoryFound);
+        assertThat(repositoryFound).isEqualTo(A_SERVICE_IMPLEMENTATION);
     }
 }

@@ -1,6 +1,6 @@
 package ca.nexapp.application.presenters;
 
-import static org.junit.Assert.assertEquals;
+import static com.google.common.truth.Truth.*;
 
 import java.util.Locale;
 
@@ -19,63 +19,63 @@ public class NumberPresenterTest {
     public void givenNoDecimalWhenPresentingShouldReturnOnlyTheIntegerPart() {
         String expected = "50";
         String actual = new NumberPresenter(A_NUMBER_WITHOUT_DECIMAL, Locale.US).present();
-        assertEquals(expected, actual);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
     public void givenNoDecimalWhenPresentingWithTwoDecimalsShouldNotAppendDecimals() {
         String expected = "50";
         String actual = new NumberPresenter(A_NUMBER_WITHOUT_DECIMAL, Locale.US).numberOfDecimals(TWO_DECIMALS).present();
-        assertEquals(expected, actual);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
     public void givenNoDecimalWhenPresentingWithRoundingShouldOnlyReturnTheIntegerPartUnmodified() {
         String expected = "50";
         String actual = new NumberPresenter(A_NUMBER_WITHOUT_DECIMAL, Locale.US).round().present();
-        assertEquals(expected, actual);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
     public void givenDecimalsWhenPresentingWithoutDecimalShouldReturnOnlyTheIntegerPart() {
         String expected = "1";
         String actual = new NumberPresenter(A_NUMBER_WITH_TWO_DECIMALS, Locale.US).present();
-        assertEquals(expected, actual);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
     public void givenTwoDecimalsWhenPresentingWithOneDecimalShouldReturnTheIntegerPartWithOneDecimal() {
         String expected = "1.3";
         String actual = new NumberPresenter(A_NUMBER_WITH_TWO_DECIMALS, Locale.US).numberOfDecimals(ONE_DECIMAL).present();
-        assertEquals(expected, actual);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
     public void givenTwoDecimalsWhenPresentingWithTwoDecimalsShouldReturnTwoDecimals() {
         String expected = "1.33";
         String actual = new NumberPresenter(A_NUMBER_WITH_TWO_DECIMALS, Locale.US).numberOfDecimals(TWO_DECIMALS).present();
-        assertEquals(expected, actual);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
     public void givenDecimalsVeryNearToTheNextIntegerWhenPresentingWithRoundingShouldReturnTheNextInteger() {
         String expected = "5";
         String actual = new NumberPresenter(A_NUMBER_WITH_SEVERAL_DECIMALS_NEAR_NEXT_INTEGER, Locale.US).round().present();
-        assertEquals(expected, actual);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
     public void givenDecimalsVeryNearToTheNextIntegerWhenPresentingWithoutDecimalShouldOnlyReturnTheInteger() {
         String expected = "4";
         String actual = new NumberPresenter(A_NUMBER_WITH_SEVERAL_DECIMALS_NEAR_NEXT_INTEGER, Locale.US).present();
-        assertEquals(expected, actual);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
     public void givenDecimalsVeryNearToTheNextIntegerWhenPresentingWithTwoDecimalsDecimalShouldReturnTheNumberWithTwoDecimals() {
         String expected = "4.99";
         String actual = new NumberPresenter(A_NUMBER_WITH_SEVERAL_DECIMALS_NEAR_NEXT_INTEGER, Locale.US).numberOfDecimals(TWO_DECIMALS).present();
-        assertEquals(expected, actual);
+        assertThat(actual).isEqualTo(expected);
     }
 
 }

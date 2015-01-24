@@ -1,13 +1,12 @@
 package ca.nexapp.application.assemblers;
 
+import static com.google.common.truth.Truth.*;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Collection;
-
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
 
 public class AssemblerTest {
 
@@ -26,28 +25,30 @@ public class AssemblerTest {
 
     @Test
     public void givenACollectionOfModelsWhenConvertingToViewModelsShouldReturnTheCorrespondingCollectionOfViewModels() {
-        Collection<String> viewModelsConverted = assembler.toViewModels(MODELS);
-        assertEquals(VIEW_MODELS, viewModelsConverted);
+        Collection<String> actualViewModels = assembler.toViewModels(MODELS);
+
+        assertThat(actualViewModels).containsAllIn(VIEW_MODELS);
     }
 
     @Test
     public void givenACollectionOfViewModelsWhenConvertingToModelsShouldReturnTheCorrespondingCollectionOfModels() {
-        Collection<Integer> modelsConverted = assembler.toModels(VIEW_MODELS);
-        assertEquals(MODELS, modelsConverted);
+        Collection<Integer> actualModels = assembler.toModels(VIEW_MODELS);
+
+        assertThat(actualModels).containsAllIn(MODELS);
     }
 
     @Test
     public void givenACollectionOfModelsWhenConvertingToAnArrayOfViewModelsShouldReturnTheCorrespondingArrayOfViewModels() {
-        String[] viewModelsConverted = new String[MODELS.size()];
-        viewModelsConverted = assembler.toArrayOfViewModels(viewModelsConverted, MODELS);
-        assertArrayEquals(VIEW_MODELS_AS_ARRAY, viewModelsConverted);
+        String[] actualViewModels = new String[MODELS.size()];
+        actualViewModels = assembler.toArrayOfViewModels(actualViewModels, MODELS);
+        assertThat(actualViewModels).isEqualTo(VIEW_MODELS_AS_ARRAY);
     }
 
     @Test
     public void givenACollectionOfViewModelsWhenConvertingToAnArrayOfModelsShouldReturnTheCorrespondingArrayOfModels() {
-        Integer[] modelsConverted = new Integer[VIEW_MODELS.size()];
-        modelsConverted = assembler.toArrayOfModels(modelsConverted, VIEW_MODELS);
-        assertArrayEquals(MODELS_AS_ARRAY, modelsConverted);
+        Integer[] actualModels = new Integer[VIEW_MODELS.size()];
+        actualModels = assembler.toArrayOfModels(actualModels, VIEW_MODELS);
+        assertThat(actualModels).isEqualTo(MODELS_AS_ARRAY);
     }
 
     private Assembler<Integer, String> buildAnAssembler() {

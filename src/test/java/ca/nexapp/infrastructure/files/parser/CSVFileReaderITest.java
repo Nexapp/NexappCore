@@ -1,7 +1,6 @@
 package ca.nexapp.infrastructure.files.parser;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
+import static com.google.common.truth.Truth.*;
 
 import java.util.List;
 
@@ -29,15 +28,16 @@ public class CSVFileReaderITest {
     @Test
     public void givenAFileWhenReadingItShouldReturnTheExactSameNumberOfLines() {
         List<String[]> lines = fileParser.parse(FILE_PATH);
-        assertEquals(NUMBER_OF_LINES_IN_FILE, lines.size());
+
+        assertThat(lines).hasSize(NUMBER_OF_LINES_IN_FILE);
     }
 
     @Test
     public void givenAFileWhenReadingItShouldCorrespondToTheExpectedList() {
         List<String[]> lines = fileParser.parse(FILE_PATH);
 
-        assertArrayEquals(FIRST_LINE, lines.get(0));
-        assertArrayEquals(SECOND_LINE, lines.get(1));
+        assertThat(FIRST_LINE).isEqualTo(lines.get(0));
+        assertThat(SECOND_LINE).isEqualTo(lines.get(1));
     }
 
     @Test(expected = IllegalArgumentException.class)

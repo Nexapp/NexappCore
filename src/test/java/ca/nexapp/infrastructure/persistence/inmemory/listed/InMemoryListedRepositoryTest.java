@@ -1,8 +1,6 @@
 package ca.nexapp.infrastructure.persistence.inmemory.listed;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static com.google.common.truth.Truth.*;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -28,48 +26,42 @@ public class InMemoryListedRepositoryTest {
     public void whenStoringAnElementShouldContainsTheElement() {
         repository.storeElement(AN_ELEMENT);
         boolean hasElement = repository.contains(AN_ELEMENT);
-        assertTrue(hasElement);
+        assertThat(hasElement).isTrue();
     }
 
     @Test
     public void givenAnEmptyRepositoryWhenStoringAnElementShouldHaveOneElement() {
         repository.storeElement(AN_ELEMENT);
         int numberOfElements = repository.countElements();
-        assertEquals(1, numberOfElements);
+        assertThat(numberOfElements).is(1);
     }
 
     @Test
     public void givenManyElementsWhenStoringThemShouldContainsThemAll() {
         repository.storeElements(MANY_ELEMENTS);
         Collection<Integer> allValues = repository.listAll();
-        assertTrue(allValues.containsAll(MANY_ELEMENTS));
+        assertThat(allValues).containsAllIn(MANY_ELEMENTS);
     }
 
     @Test
     public void givenAnEmptyRepositoryWhenListingAllValuesShouldReturnAnEmptyList() {
         List<Integer> allValues = repository.listAll();
-        boolean hasNoElements = allValues.isEmpty();
-        assertTrue(hasNoElements);
+
+        assertThat(allValues).hasSize(0);
     }
 
     @Test
     public void givenAnElementWhenListingAllValuesThenTheListShouldContainsTheElement() {
         repository.storeElement(AN_ELEMENT);
-
         List<Integer> allValues = repository.listAll();
-        boolean hasElement = allValues.contains(AN_ELEMENT);
-
-        assertTrue(hasElement);
+        assertThat(allValues).contains(AN_ELEMENT);
     }
 
     @Test
     public void givenAnElementWhenListingAllValuesThenTheListShouldHaveASizeOfOne() {
         repository.storeElement(AN_ELEMENT);
-
         List<Integer> allValues = repository.listAll();
-        int sizeOfCollection = allValues.size();
-
-        assertEquals(1, sizeOfCollection);
+        assertThat(allValues).hasSize(1);
     }
 
     @Test
@@ -79,7 +71,7 @@ public class InMemoryListedRepositoryTest {
 
         int numberOfElements = repository.countElements();
 
-        assertEquals(0, numberOfElements);
+        assertThat(numberOfElements).is(0);
     }
 
     @Test
@@ -89,6 +81,6 @@ public class InMemoryListedRepositoryTest {
 
         boolean hasElement = repository.contains(AN_ELEMENT);
 
-        assertFalse(hasElement);
+        assertThat(hasElement).isFalse();
     }
 }

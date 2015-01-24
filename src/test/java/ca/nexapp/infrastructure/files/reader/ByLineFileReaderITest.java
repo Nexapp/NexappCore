@@ -1,6 +1,6 @@
 package ca.nexapp.infrastructure.files.reader;
 
-import static org.junit.Assert.assertEquals;
+import static com.google.common.truth.Truth.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,13 +27,15 @@ public class ByLineFileReaderITest {
     @Test
     public void givenAFileWhenReadingItShouldReturnTheExactSameNumberOfLines() {
         List<String> lines = fileReader.read(FILE_PATH);
-        assertEquals(NUMBER_OF_LINES_IN_FILE, lines.size());
+
+        assertThat(lines).hasSize(NUMBER_OF_LINES_IN_FILE);
     }
 
     @Test
     public void givenAFileWhenReadingItShouldCorrespondToTheExpectedList() {
         List<String> lines = fileReader.read(FILE_PATH);
-        assertEquals(EXPECTED_LIST, lines);
+
+        assertThat(lines).isEqualTo(EXPECTED_LIST);
     }
 
     @Test(expected = IllegalArgumentException.class)
