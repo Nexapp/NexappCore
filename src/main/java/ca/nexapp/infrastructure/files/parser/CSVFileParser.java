@@ -3,6 +3,7 @@ package ca.nexapp.infrastructure.files.parser;
 import ca.nexapp.infrastructure.files.reader.FileReader;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class CSVFileParser implements FileParser<List<String[]>> {
@@ -19,7 +20,7 @@ public class CSVFileParser implements FileParser<List<String[]>> {
         return parseAllLines(nonParsedLines);
     }
 
-    private List<String[]> parseAllLines(List<String> nonParsedLines) {
+    private List<String[]> parseAllLines(Collection<String> nonParsedLines) {
         List<String[]> parsedLines = new ArrayList<>(nonParsedLines.size());
         for (String nonParsedLine : nonParsedLines) {
             parsedLines.add(parseLine(nonParsedLine));

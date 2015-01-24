@@ -1,14 +1,13 @@
 package ca.nexapp.infrastructure.persistence.inmemory.listed;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class InMemoryListedRepository<E> {
 
-    private List<E> elements = new ArrayList<>();
+    private final List<E> elements = new ArrayList<>();
 
-    protected final void storeElements(Collection<E> elements) {
+    protected final void storeElements(Iterable<E> elements) {
         for (E element : elements) {
             storeElement(element);
         }
@@ -19,7 +18,7 @@ public class InMemoryListedRepository<E> {
     }
 
     protected final List<E> listAll() {
-        return elements;
+        return new ArrayList<>(elements);
     }
 
     protected final int countElements() {

@@ -26,7 +26,7 @@ public abstract class Assembler<M, V> {
         return viewModels;
     }
 
-    public final M[] toArrayOfModels(M[] emptyModels, Collection<V> viewModels) {
+    public final M[] toArrayOfModels(M[] emptyModels, Iterable<V> viewModels) {
         Iterator<V> viewModelsIterator = viewModels.iterator();
 
         for (int i = 0; viewModelsIterator.hasNext(); ++i) {
@@ -39,7 +39,7 @@ public abstract class Assembler<M, V> {
         return emptyModels;
     }
 
-    public final V[] toArrayOfViewModels(V[] emptyViewModels, Collection<M> models) {
+    public final V[] toArrayOfViewModels(V[] emptyViewModels, Iterable<M> models) {
         Iterator<M> modelsIterator = models.iterator();
 
         for (int i = 0; modelsIterator.hasNext(); ++i) {

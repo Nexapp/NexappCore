@@ -7,9 +7,9 @@ import java.util.Objects;
 
 public abstract class InMemoryKeyedRepository<E> {
 
-    private Map<Integer, E> elements = new HashMap<>();
+    private final Map<Integer, E> elements = new HashMap<>();
 
-    protected final void storeElements(Collection<E> elements) {
+    protected final void storeElements(Iterable<E> elements) {
         for (E element : elements) {
             storeElement(element);
         }
