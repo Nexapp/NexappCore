@@ -2,8 +2,8 @@
 Several classes that we use everyday.
 
 ## Provided by the library
-**ServiceLocator**: The super lightweight anti-pattern to inject dependencies easily. Generally combined with the BaseContext class.
-**NumberPresenter**: A helper to present numbers in various forms (rounded or not, with n decimals, etc.)
+**ServiceLocator**: The super lightweight anti-pattern to inject dependencies easily. Generally combined with the BaseContext class. <br />
+**NumberPresenter**: A helper to present numbers in various forms (rounded or not, with n decimals, etc.) <br />
 **FileReader**: Two implementations available: CSV reader and Line per Line reader.
 
 ## How to use it
