@@ -3,6 +3,7 @@ Several classes that we use everyday.
 
 ## Provided by the library
 **ServiceLocator**: The super lightweight anti-pattern to inject dependencies easily. Generally combined with the BaseContext class. <br />
+**EmailValidator**: Perform email validations. <br />
 **NumberPresenter**: A helper to present numbers in various forms (rounded or not, with n decimals, etc.) <br />
 **FileReader**: Two implementations available: CSV reader and Line per Line reader.
 
@@ -28,6 +29,6 @@ Then, you simply add the dependency as follows:
 <dependency>
 	<groupId>ca.nexapp</groupId>
 	<artifactId>core</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 </dependency>
 ```
