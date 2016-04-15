@@ -221,4 +221,10 @@ public class WithRegexEmailValidatorTest {
     public void cannotHaveADomainWithOneCharacter() {
         assertThat(validator.isValid("email@d.com")).isTrue();
     }
+
+    @Test
+    public void cannotHaveSpacesInTheEmail() {
+        assertThat(validator.isValid("john doe@two domains.com")).isFalse();
+    }
+
 }
