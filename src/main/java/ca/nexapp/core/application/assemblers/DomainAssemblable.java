@@ -1,13 +1,19 @@
 package ca.nexapp.core.application.assemblers;
 
+import java.util.Arrays;
 import java.util.Collection;
-import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public interface DomainAssemblable<M, V> {
 
     M assembleToDomain(V dto);
 
-    default Collection<M> assembleToDomains(Collection<V> dtos) {
-        return dtos.stream().map(this::assembleToDomain).collect(Collectors.toList());
+    @SuppressWarnings("unchecked")
+    default Stream<M> assembleToDomains(V... dtos) {
+        return assembleToDomains(Arrays.asList(dtos));
+    }
+
+    default Stream<M> assembleToDomains(Collection<V> dtos) {
+        return dtos.stream().map(this::assembleToDomain);
     }
 }

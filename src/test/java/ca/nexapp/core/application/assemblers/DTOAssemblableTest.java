@@ -2,20 +2,15 @@ package ca.nexapp.core.application.assemblers;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 
-import java.util.Arrays;
-import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import ca.nexapp.core.application.assemblers.DTOAssemblable;
-
 public class DTOAssemblableTest {
-
-    private static final Integer A_MODEL = 2;
 
     private DTOAssemblable<Integer, String> assembler;
 
@@ -25,17 +20,11 @@ public class DTOAssemblableTest {
     }
 
     @Test
-    public void givenThreeModels_WhenAssemblingToDTOs_ShouldAssembleThreeTimes() {
-        assembler.assembleToDTOs(Arrays.asList(A_MODEL, A_MODEL, A_MODEL));
-
-        verify(assembler, times(3)).assembleToDTO(A_MODEL);
-    }
-
-    @Test
     public void givenAModel_WhenAssemblingToDTOs_ShouldReturnTheAssembledDTO() {
-        Collection<String> models = assembler.assembleToDTOs(Arrays.asList(A_MODEL));
+        Stream<String> dtos = assembler.assembleToDTOs(1, 4, 7, 30, 75);
 
-        assertThat(models).containsExactly("2");
+        List<String> actual = dtos.collect(Collectors.toList());
+        assertThat(actual).containsExactly("1", "4", "7", "30", "75");
     }
 
     private class MinimalDTOAssembler implements DTOAssemblable<Integer, String> {

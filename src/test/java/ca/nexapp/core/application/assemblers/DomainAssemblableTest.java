@@ -1,41 +1,29 @@
 package ca.nexapp.core.application.assemblers;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 
-import java.util.Arrays;
-import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import ca.nexapp.core.application.assemblers.DomainAssemblable;
-
 public class DomainAssemblableTest {
-
-    private static final String A_DTO = "2";
 
     private DomainAssemblable<Integer, String> assembler;
 
     @Before
     public void setUp() {
-        assembler = spy(new MinimalDomainAssembler());
+        assembler = new MinimalDomainAssembler();
     }
 
     @Test
-    public void givenThreeDTOs_WhenAssemblingToModels_ShouldAssembleThreeTimes() {
-        assembler.assembleToDomains(Arrays.asList(A_DTO, A_DTO, A_DTO));
+    public void givenADTO_WhenAssemblingToDomains_ShouldReturnTheAssembledModel() {
+        Stream<Integer> models = assembler.assembleToDomains("45", "48", "59", "64");
 
-        verify(assembler, times(3)).assembleToDomain(A_DTO);
-    }
-
-    @Test
-    public void givenADTO_WhenAssemblingToModels_ShouldReturnTheAssembledModel() {
-        Collection<Integer> models = assembler.assembleToDomains(Arrays.asList(A_DTO));
-
-        assertThat(models).containsExactly(2);
+        List<Integer> actual = models.collect(Collectors.toList());
+        assertThat(actual).containsExactly(45, 48, 59, 64);
     }
 
     private class MinimalDomainAssembler implements DomainAssemblable<Integer, String> {
