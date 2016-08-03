@@ -5,6 +5,7 @@ Several classes that we use everyday.
 **ServiceLocator**: The super lightweight anti-pattern to inject dependencies easily. Generally combined with the BaseContext class. <br />
 **EmailValidator**: Perform email validations. <br />
 **NumberPresenter**: A helper to present numbers in various forms (rounded or not, with n decimals, etc.) <br />
+**DateProvider**: An interface to provide date and timestamp. Mostly use for mocking. There is a Java implementation as well. <br />
 **FileReader**: Two implementations available: CSV reader and Line per Line reader.
 
 ## How to use it
