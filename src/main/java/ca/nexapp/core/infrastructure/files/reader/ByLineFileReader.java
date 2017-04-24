@@ -11,7 +11,7 @@ public class ByLineFileReader implements FileReader<List<String>> {
     @Override
     public List<String> read(String filePath) {
         try {
-            Path pathResource = Paths.get(getClass().getResource(filePath).toURI());
+            Path pathResource = Paths.get(filePath);
             return Files.readAllLines(pathResource, StandardCharsets.UTF_8);
         } catch (Exception e) {
             throw new IllegalArgumentException("Cannot read file '" + filePath + "'.");
