@@ -5,7 +5,7 @@
 
 	<groupId>ca.nexapp</groupId>
 	<artifactId>core</artifactId>
-	<version>0.0.4</version>
+	<version>0.0.5</version>
 	<packaging>jar</packaging>
 
 	<name>Nexapp Core</name>
@@ -53,8 +53,7 @@
 					<repositoryOwner>Nexapp</repositoryOwner>
 				</configuration>
 				<executions>
-					<!-- run site-maven-plugin's 'site' target as part of the build's normal 
-						'deploy' phase -->
+					<!-- run site-maven-plugin's 'site' target as part of the build's normal 'deploy' phase -->
 					<execution>
 						<goals>
 							<goal>site</goal>
