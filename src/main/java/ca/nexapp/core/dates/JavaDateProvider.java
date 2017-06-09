@@ -4,6 +4,8 @@ import java.time.Clock;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 public class JavaDateProvider implements DateProvider {
 
@@ -15,6 +17,11 @@ public class JavaDateProvider implements DateProvider {
     @Override
     public LocalDateTime currentDateTime() {
         return LocalDateTime.now(Clock.systemUTC());
+    }
+
+    @Override
+    public ZonedDateTime currentDateTime(ZoneId zone) {
+        return currentTimestamp().atZone(zone);
     }
 
     @Override
