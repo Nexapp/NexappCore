@@ -4,10 +4,12 @@ public class Pagination {
 
     private final int page;
     private final int itemPerPage;
+    private final int offset;
 
-    private Pagination(int page, int itemPerPage) {
+    private Pagination(int page, int itemPerPage, int offset) {
         this.page = page;
         this.itemPerPage = itemPerPage;
+        this.offset = offset;
     }
 
     public int page() {
@@ -19,15 +21,20 @@ public class Pagination {
     }
 
     public int startingIndex() {
-        return (page - 1) * itemPerPage;
+        return offset;
     }
 
     public static Pagination paged(int page, int itemPerPage) {
-        return new Pagination(Math.max(page, 1), Math.max(itemPerPage, 1));
+        page = Math.max(page, 1);
+        itemPerPage = Math.max(itemPerPage, 1);
+        int offset = (page - 1) * itemPerPage;
+        return new Pagination(page, itemPerPage, offset);
     }
 
     public static Pagination offsetted(int offset, int itemPerPage) {
-        int page = Math.max(offset / itemPerPage + 1, 1);
-        return new Pagination(page, Math.max(itemPerPage, 1));
+        itemPerPage = Math.max(itemPerPage, 1);
+        offset = Math.max(offset, 1);
+        int page = offset / itemPerPage + 1;
+        return new Pagination(page, itemPerPage, offset);
     }
 }

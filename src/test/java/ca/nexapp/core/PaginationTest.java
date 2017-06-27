@@ -19,12 +19,12 @@ public class PaginationTest {
 
     @Test
     public void canCreateAPaginationFromAnOffset() {
-        int offset = 15;
-        int itemPerPage = 5;
+        int offset = 5;
+        int itemPerPage = 20;
         Pagination pagination = Pagination.offsetted(offset, itemPerPage);
 
-        assertThat(pagination.page()).isEqualTo(4);
-        assertThat(pagination.itemPerPage()).isEqualTo(5);
-        assertThat(pagination.startingIndex()).isEqualTo(15);
+        assertThat(pagination.page()).isEqualTo(1);
+        assertThat(pagination.itemPerPage()).isEqualTo(20);
+        assertThat(pagination.startingIndex()).isEqualTo(5);
     }
 }
