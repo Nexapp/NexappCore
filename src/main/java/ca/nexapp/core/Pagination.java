@@ -25,4 +25,9 @@ public class Pagination {
     public static Pagination paged(int page, int itemPerPage) {
         return new Pagination(Math.max(page, 1), Math.max(itemPerPage, 1));
     }
+
+    public static Pagination offsetted(int offset, int itemPerPage) {
+        int page = Math.max(offset / itemPerPage + 1, 1);
+        return new Pagination(page, Math.max(itemPerPage, 1));
+    }
 }
