@@ -6,7 +6,6 @@ Several classes that we use everyday.
 **EmailValidator**: Perform email validations. <br />
 **NumberPresenter**: A helper to present numbers in various forms (rounded or not, with n decimals, etc.) <br />
 **DateProvider**: An interface to provide date and timestamp. Mostly use for mocking. There is a Java implementation as well. <br />
-**FileReader**: Two implementations available: CSV reader and Line per Line reader. <br />
 **Range**: Can handle two comparables (overlapping for example). <br />
 **Pagination**: Structure that represents the pagination concept (page, itemPerPage, startingIndex). <br />
 
@@ -32,6 +31,6 @@ Then, you simply add the dependency as follows:
 <dependency>
 	<groupId>ca.nexapp</groupId>
 	<artifactId>core</artifactId>
-	<version>0.0.5</version>
+	<version>0.0.6</version>
 </dependency>
 ```
