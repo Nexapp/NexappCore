@@ -69,11 +69,6 @@
       <property name="option" value="EOL"/>
       <property name="tokens" value="COMMA"/>
     </module>
-    <module name="SeparatorWrap">
-      <property name="id" value="SeparatorWrapMethodRef"/>
-      <property name="option" value="nl"/>
-      <property name="tokens" value="METHOD_REF"/>
-    </module>
     <module name="PackageName">
       <property name="format" value="^[a-z]+(\.[a-z][a-z0-9]*)*$"/>
       <message key="name.invalidPattern" value="Package name ''{0}'' must match pattern ''{1}''."/>
