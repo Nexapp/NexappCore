@@ -78,7 +78,7 @@ System.out.println(display); // 5.4
 ```
 
 **ServiceLocator** <br />
-Super lightweight anti-pattern to inject dependencies easily. Useful for light testing.
+Super lightweight anti-pattern to inject dependencies easily. Useful for light testing in shared contexts.
 ```java
 ServiceLocator.locate().register(MyClass.class, new MyClass());
 
