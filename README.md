@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Nexapp/NexappCore.svg?branch=master)](https://travis-ci.org/Nexapp/NexappCore)
+
 # Nexapp Core
 Several classes that we use everyday.
 
