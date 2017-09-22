@@ -26,9 +26,7 @@ public class PickerTest {
 
     @Test
     public void canPickOneItem() {
-        List<Integer> items = Arrays.asList(1, 2, 3, 4, 5);
-
-        Optional<Integer> picked = Picker.pickOne(items);
+        Optional<Integer> picked = Picker.pickOne(1, 2, 3, 4, 5);
 
         assertThat(picked.get()).isAnyOf(1, 2, 3, 4, 5);
     }

@@ -1,6 +1,7 @@
 package ca.nexapp.core.random;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -8,6 +9,11 @@ import java.util.Optional;
 import java.util.Random;
 
 public class Picker {
+
+    @SafeVarargs
+    public static <E> Optional<E> pickOne(E... items) {
+        return pickOne(Arrays.asList(items));
+    }
 
     public static <E> Optional<E> pickOne(Collection<E> items) {
         return pickOne(items, Collections.emptySet());
