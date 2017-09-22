@@ -53,22 +53,23 @@ Pagination offset = Pagination.offsetted(50, 10); // Skip the 50 first items, th
 A picker that can pick items randomly within a `Collection`.
 ```java
 List<Integer> items = Arrays.asList(1, 2, 3, 4, 5);
-Optional<Integer> picked = new Picker<>(items).pickOne();
-List<Integer> threePicks = new Picker<>(items).pick(3);
+Optional<Integer> picked = Picker.pickOne(items);
+List<Integer> threePicks = Picker.pick(items, 3);
+List<Integer> allPicked = Picker.pick(items, 1000); // Returns (1, 2, 3, 4, 5);  Cannot be picked more than once.
 
 List<Integer> ignored = Arrays.asList(4, 5);
-List<Integer> thousandPicks = new Picker<>(items).pick(1000, ignored); // Will not contains any 4 or 5
+List<Integer> thousandPicks = Picker.pick(items, 1000, ignored); // Will not contains any 4 or 5
 ```
 
-**WeightedSet** <br />
-A set that applies a weight to each of its items. It is basically a lottery system where each item has X chance(s) of being picked.
+**WeightedPicker** <br />
+A picker that applies a weight to each of its items. It is basically a lottery system where each item has X chance(s) of being picked.
 ```java
 List<Integer> items = Arrays.asList(1, 2, 3, 4, 5);
 Function<Integer, Number> weight = (item) -> {
   return item % 2 == 0 ? 10 : 1;
 };
 
-Optional<Integer> picked = new WeightedSet<>(items, weight).pickOne();
+Optional<Integer> picked = WeightedPicker.pickOne(items, weight);
 ```
 
 **NumberPresenter**
