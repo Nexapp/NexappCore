@@ -4,41 +4,42 @@ import static com.google.common.truth.Truth.assertThat;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
 import org.junit.Rule;
 import org.junit.Test;
 
-public class WeightedSetTest {
+public class WeightedPickerTest {
 
     @Rule
     public RepeatRule repeatRule = new RepeatRule();
 
     @Test
     public void givenNoItem_ShouldNotPickAnyItem() {
-        WeightedSet<Integer> set = new WeightedSet<>(Collections.emptyList(), weightFunction());
+        List<Integer> items = Collections.emptyList();
 
-        Optional<Integer> result = set.pickOne();
+        Optional<Integer> result = WeightedPicker.pickOne(items, weightFunction());
 
         assertThat(result.isPresent()).isFalse();
     }
 
     @Test
     public void givenOneItem_CanPickIt() {
-        WeightedSet<Integer> set = new WeightedSet<>(Arrays.asList(2), weightFunction());
+        List<Integer> items = Arrays.asList(2);
 
-        Optional<Integer> result = set.pickOne();
+        Optional<Integer> result = WeightedPicker.pickOne(items, weightFunction());
 
         assertThat(result.get()).isEqualTo(2);
     }
 
     @Test
     @Repeat(50)
-    public void givenMultipleItems_CanPickOneOfthem() {
-        WeightedSet<Integer> set = new WeightedSet<>(Arrays.asList(2, 6, 10), weightFunction());
+    public void givenMultipleItems_CanPickOneOfThem() {
+        List<Integer> items = Arrays.asList(2, 6, 10);
 
-        Optional<Integer> result = set.pickOne();
+        Optional<Integer> result = WeightedPicker.pickOne(items, weightFunction());
 
         assertThat(result.get()).isAnyOf(2, 6, 10);
     }
@@ -52,14 +53,14 @@ public class WeightedSetTest {
             }
             return 1;
         };
-        WeightedSet<String> set = new WeightedSet<>(Arrays.asList("John", "Sam"), weight);
+        List<String> names = Arrays.asList("John", "Sam");
 
-        Optional<String> result = set.pickOne();
+        Optional<String> result = WeightedPicker.pickOne(names, weight);
 
         assertThat(result.get()).doesNotContain("John");
     }
 
     private Function<Integer, Number> weightFunction() {
-        return (a) -> Long.valueOf(a);
+        return (a) -> a;
     }
 }
