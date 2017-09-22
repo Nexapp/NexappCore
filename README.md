@@ -8,15 +8,11 @@ Several Java mini-modules for REST APIs.
 ```java
 // Useful for mocking purposes
 DateProvider dateProvider = new JavaDateProvider();
-
-// Without timezone
-Instant now = dateProvider.currentTimestamp();
-LocalDateTime now = dateProvider.currentDateTime();
-LocalDate now = dateProvider.currentDate();
-
-// With timezone
 ZoneId zone = ZoneId.of("America/Montreal");
+
+Instant now = dateProvider.currentTimestamp();
 ZonedDateTime now = dateProvider.currentDateTime(zone);
+LocalDate today = dateProvider.currentDate(zone);
 DayOfWeek day = dateProvider.currentDayOfWeek(zone);
 ``` 
 
