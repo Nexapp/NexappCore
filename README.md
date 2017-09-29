@@ -4,7 +4,7 @@
 Several Java mini-modules for REST APIs.
 
 ## Provided by the library
-**DateProvider**
+### DateProvider
 ```java
 // Useful for mocking purposes
 DateProvider dateProvider = new JavaDateProvider();
@@ -16,7 +16,7 @@ LocalDate today = dateProvider.currentDate(zone);
 DayOfWeek day = dateProvider.currentDayOfWeek(zone);
 ``` 
 
-**EmailValidator**
+### EmailValidator
 ```java
 EmailValidator validator = new WithRegexEmailValidator();
 boolean valid = validator.isValid("john.doe@email.com");
@@ -25,7 +25,7 @@ validator.validate("john.doe@email.com"); // no exception
 validator.validate("john..doe..@..email.com"); // throws an exception
 ```
 
-**Range**
+### Range
 ```java
 Range<Integer> kids = Range.of(6, 12);
 Range<Integer> adults = Range.of(18, 65);
@@ -34,7 +34,7 @@ boolean overlapping = kids.isOverlapping(adults); // false
 boolean overlapping = kids.isOverlapping(Range.of(0, 12)); // true
 ```
 
-**Pagination** <br />
+### Pagination
 Useful structure to represent pagination concept.
 ```java
 Pagination page = Pagination.paged(1, 10); // First ten items
@@ -45,7 +45,7 @@ System.out.println(page.startingIndex()); // 0
 Pagination offset = Pagination.offsetted(50, 10); // Skip the 50 first items, then take 10 items
 ```
 
-**Picker** <br />
+### Picker
 A picker that can pick items randomly within a `Collection`.
 ```java
 List<Integer> items = Arrays.asList(1, 2, 3, 4, 5);
@@ -57,7 +57,7 @@ List<Integer> ignored = Arrays.asList(4, 5);
 List<Integer> thousandPicks = Picker.pick(items, 1000, ignored); // Will not contains any 4 or 5
 ```
 
-**WeightedPicker** <br />
+### WeightedPicker
 A picker that applies a weight to each of its items. It is basically a lottery system where each item has X chance(s) of being picked.
 ```java
 List<Integer> items = Arrays.asList(1, 2, 3, 4, 5);
@@ -68,7 +68,7 @@ Function<Integer, Number> weight = (item) -> {
 Optional<Integer> picked = WeightedPicker.pickOne(items, weight);
 ```
 
-**NumberPresenter**
+### NumberPresenter
 ```java
 String display = new NumberPresenter(5.39332).numberOfDecimals(1).round().present();
 System.out.println(display); // 5.4
@@ -77,7 +77,7 @@ String display = new NumberPresenter(6.9876).numberOfDecimals(1).present();
 System.out.println(display); // 6.9
 ```
 
-**ServiceLocator** <br />
+### ServiceLocator
 Super lightweight anti-pattern to inject dependencies easily. Useful for light testing in shared contexts.
 ```java
 ServiceLocator.locate().register(MyClass.class, new MyClass());
@@ -88,6 +88,33 @@ MyClass instance = ServiceLocator.locate().resolve(MyClass.class);
 // ...
 ServiceLocator.reset(); // Clear all registrations
 ```
+
+### Unit of Work 
+Implementation of a pattern-agnostic (trying to be) Unit of Work pattern in Java. For now the only implementation is using JDBI but it could be easily adapted to pure JDBC or Hibernate.
+
+**Warning** 
+> The JDBI UnitOfWork uses `ThreadLocal` for its "context". You will not get transaction-isolation in "sub-threads" or asynchronous code.
+
+```java
+UnitOfWork<Handle> unitOfWork = new JDBIUnitOfWork(DBI);
+unitOfWork.begin();
+
+try {
+	// never use simple double for currency manipulations, this is an example
+	unitOfWork.withTransaction(transaction -> withdraw("user1", 5.0));
+	unitOfWork.withTransaction(transaction -> withdraw("user2", 5.0));
+	unitOfWork.withTransaction(transaction -> transfer("user3", 10.0));
+
+	unitOfWork.commit();
+} catch (CriticalMoneyException e) {
+	unitOfWork.rollback();
+	throw e;
+} finally {
+	unitOfWork.dispose();
+}
+```
+
+A servlet filter is given for standard Java Web Services with `TransactionFilter`
 
 ## How to use it
 At the moment, this project is hosted on GitHub and not on Maven Central.
