@@ -33,7 +33,7 @@ public class Pagination {
 
     public static Pagination offsetted(int offset, int itemPerPage) {
         itemPerPage = Math.max(itemPerPage, 1);
-        offset = Math.max(offset, 1);
+        offset = Math.max(offset, 0);
         int page = offset / itemPerPage + 1;
         return new Pagination(page, itemPerPage, offset);
     }
