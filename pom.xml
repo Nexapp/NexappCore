@@ -5,7 +5,7 @@
 
 	<groupId>ca.nexapp</groupId>
 	<artifactId>core</artifactId>
-	<version>0.0.7</version>
+	<version>0.0.8</version>
 	<packaging>jar</packaging>
 
 	<name>Nexapp Core</name>
@@ -73,6 +73,13 @@
 		</repository>
 	</distributionManagement>
 
+	<repositories>
+		<repository>
+			<id>nexapp-math-mvn-repo</id>
+			<url>https://raw.github.com/nexapp/nexappmath/mvn-repo/</url>
+		</repository>
+	</repositories>
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -93,6 +100,18 @@
 			<artifactId>truth</artifactId>
 			<version>0.32</version>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>ca.nexapp</groupId>
+			<artifactId>math</artifactId>
+			<version>0.0.7</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.maps</groupId>
+			<artifactId>google-maps-services</artifactId>
+			<version>0.1.12</version>
 		</dependency>
 	</dependencies>
 </project>
