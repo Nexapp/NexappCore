@@ -68,6 +68,15 @@ Function<Integer, Number> weight = (item) -> {
 Optional<Integer> picked = WeightedPicker.pickOne(items, weight);
 ```
 
+**Geocoder** <br />
+```java
+String googleMapsApiKey = "xxxx.xxxx.xxxx.xxxx";
+Geocoder geocoder = new GoogleGeocoderAPI(googleMapsApiKey);
+
+String address = "555 55th street, New York, NY";
+Optional<Coordinates> location = geocoder.lookup(address);
+```
+
 **NumberPresenter**
 ```java
 String display = new NumberPresenter(5.39332).numberOfDecimals(1).round().present();
@@ -107,6 +116,9 @@ Then, you simply add the dependency as follows:
 <dependency>
 	<groupId>ca.nexapp</groupId>
 	<artifactId>core</artifactId>
-	<version>0.0.7</version>
+	<version>0.0.8</version>
 </dependency>
 ```
+
+## How to contribute
+In order to run integration tests, you need to request an API key from _Google Maps_, and then set `NEXAPP_CORE_GOOGLE_MAPS_API_KEY` as an environment variable.
