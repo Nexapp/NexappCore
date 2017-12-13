@@ -1,30 +1,26 @@
 package ca.nexapp.core.authentication.hashers;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+
+import org.apache.commons.codec.digest.DigestUtils;
 
 public class SHA512PasswordHasher implements PasswordHasher {
 
     @Override
     public byte[] hash(String raw, byte[] salt) {
-        MessageDigest digest = digest();
-        digest.update(salt);
-        byte[] bytes = digest.digest(raw.getBytes(StandardCharsets.UTF_8));
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < bytes.length; i++) {
-            builder.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-        }
-        return builder.toString().getBytes(StandardCharsets.UTF_8);
-    }
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
 
-    private MessageDigest digest() {
         try {
-            return MessageDigest.getInstance("SHA-512");
-        } catch (NoSuchAlgorithmException e) {
-            throw new IllegalStateException("MessageDigest SHA-512 does not exist");
+            output.write(salt);
+            output.write(raw.getBytes(StandardCharsets.UTF_8));
+        } catch (IOException e) {
+            throw new IllegalArgumentException(e);
         }
+
+        return DigestUtils.sha512(output.toByteArray());
     }
 
     @Override
