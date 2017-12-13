@@ -77,6 +77,39 @@ String address = "555 55th street, New York, NY";
 Optional<Coordinates> location = geocoder.lookup(address);
 ```
 
+**Authentication** <br />
+We provide many utility classes to speed up the process of authentication. Let's see an example:
+
+```java
+public Optional<Admin> authenticate(BasicCredentials credentials) {
+    Optional<Admin> found = adminRepository.findByEmail(credentials.getUsername());
+    if (!found.isPresent()) {
+        return Optional.empty();
+    }
+    Admin admin = found.get();
+    if (!admin.matches(credentials.getPassword())) {
+        return Optional.empty();
+    }
+    return found;
+}
+```
+
+The `Admin` class can matches a raw password(`String`) by implementating our `Authenticable` interface. Afterward, you simply need to persist the `Password` like all the other primitives. The `Password` class contains a `salt` and a `hashed` as `bytes[]`, and you can only create a `Password` instance by providing a `SaltGenerator` and `PasswordHasher` implementation as follows:
+
+```java
+SaltGenerator saltGenerator = new SecureRandomSaltGenerator();
+PasswordHasher passwordHasher = new SHA512PasswordHasher();
+Password password = Password.fromPlaintext("qwerty12345", saltGenerator, passwordHasher);
+
+// Or if you have it persisted, you can use:
+// byte[] hashedPassword = ...;
+// byte[] salt = ...;
+// Password password = Password.fromHash(hashedPassword, salt, passwordHasher);
+
+Admin admin = new Admin("john.doe@email.com", password);
+adminRepository.persist(admin);
+```
+
 **NumberPresenter**
 ```java
 String display = new NumberPresenter(5.39332).numberOfDecimals(1).round().present();
@@ -116,7 +149,7 @@ Then, you simply add the dependency as follows:
 <dependency>
 	<groupId>ca.nexapp</groupId>
 	<artifactId>core</artifactId>
-	<version>0.0.8</version>
+	<version>0.0.9</version>
 </dependency>
 ```
 
