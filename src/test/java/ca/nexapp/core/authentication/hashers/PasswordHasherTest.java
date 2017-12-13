@@ -5,6 +5,8 @@ import static com.google.common.truth.Truth.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.pholser.junit.quickcheck.Property;
+
 public abstract class PasswordHasherTest {
 
     private static final String A_PASSWORD = "A_PASSWORD";
@@ -44,6 +46,15 @@ public abstract class PasswordHasherTest {
         boolean matched = hasher.matches(ANOTHER_PASSWORD, hashed, A_SALT);
 
         assertThat(matched).isFalse();
+    }
+
+    @Property(trials = 500)
+    public void samePasswordAndSaltShouldMatchHash(String password, byte[] salt) {
+        byte[] hashed = hasher.hash(password, salt);
+
+        boolean matched = hasher.matches(password, hashed, salt);
+
+        assertThat(matched).isTrue();
     }
 
     protected abstract PasswordHasher createHasher();
