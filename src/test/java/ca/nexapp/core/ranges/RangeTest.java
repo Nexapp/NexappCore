@@ -53,4 +53,40 @@ public class RangeTest {
 
         assertThat(range.isOverlapping(same)).isTrue();
     }
+
+    @Test
+    public void givenAnElementOnLeftEnd_ItShouldNotContainsIt() {
+        Range<Integer> range = Range.of(20, 50);
+
+        assertThat(range.contains(4)).isFalse();
+    }
+
+    @Test
+    public void givenAnElementOnLowerbound_ItShouldContainsIt() {
+        Range<Integer> range = Range.of(20, 50);
+
+        assertThat(range.contains(20)).isTrue();
+    }
+
+    @Test
+    public void givenAnElementInsideRange_ItShouldContainsIt() {
+        Range<Integer> range = Range.of(20, 50);
+
+        assertThat(range.contains(45)).isTrue();
+    }
+
+    @Test
+    public void givenAnElementOnUpperbound_ItShouldContainsIt() {
+        Range<Integer> range = Range.of(20, 50);
+
+        assertThat(range.contains(50)).isTrue();
+    }
+
+    @Test
+    public void givenAnElementOnRightEnd_ItShouldNotContainsIt() {
+        Range<Integer> range = Range.of(20, 50);
+
+        assertThat(range.contains(99232)).isFalse();
+    }
+
 }

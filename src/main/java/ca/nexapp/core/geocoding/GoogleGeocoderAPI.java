@@ -25,7 +25,7 @@ public class GoogleGeocoderAPI implements Geocoder {
 
     private Optional<LatLng> fetchGoogleAddress(String address) {
         // https://github.com/googlemaps/google-maps-services-java
-        GeoApiContext context = new GeoApiContext().setApiKey(apiKey);
+        GeoApiContext context = new GeoApiContext.Builder().apiKey(apiKey).build();
         GeocodingResult[] results = GeocodingApi.geocode(context, address).awaitIgnoreError(); // synchronous
         if (results.length == 0) {
             return Optional.empty();
