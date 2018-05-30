@@ -24,6 +24,10 @@ public class Range<E extends Comparable<E>> {
         return from.compareTo(other.to) <= 0 && other.from.compareTo(to) <= 0;
     }
 
+    public boolean contains(E other) {
+        return from.compareTo(other) <= 0 && to.compareTo(other) >= 0;
+    }
+
     public static <E extends Comparable<E>> Range<E> of(E from, E to) {
         return new Range<>(from, to);
     }
