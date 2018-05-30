@@ -3,12 +3,10 @@
   <groupId>ca.nexapp</groupId>
   <artifactId>core</artifactId>
   <versioning>
-    <release>0.0.9</release>
+    <release>0.1.0</release>
     <versions>
-      <version>0.0.7</version>
-      <version>0.0.8</version>
-      <version>0.0.9</version>
+      <version>0.1.0</version>
     </versions>
-    <lastUpdated>20171210234810</lastUpdated>
+    <lastUpdated>20180530214512</lastUpdated>
   </versioning>
 </metadata>
