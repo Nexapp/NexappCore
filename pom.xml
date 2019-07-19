@@ -9,6 +9,30 @@
 	<packaging>jar</packaging>
 
 	<name>Nexapp Core</name>
+	<description>Several reusable classes that we use daily.</description>
+	<url>https://github.com/Nexapp/NexappCore</url>
+
+	<licenses>
+		<license>
+			<name>The Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<name>Nexapp</name>
+			<email>developers@nexapp.ca</email>
+			<organization>Nexapp Technologies</organization>
+			<organizationUrl>http://www.nexapp.ca</organizationUrl>
+		</developer>
+	</developers>
+
+	<scm>
+		<connection>scm:git:git://github.com/nexapp/nexappcore.git</connection>
+		<developerConnection>scm:git:ssh://github.com:nexapp/nexappcore.git</developerConnection>
+		<url>http://github.com/nexapp/nexappcore/tree/master</url>
+	</scm>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
