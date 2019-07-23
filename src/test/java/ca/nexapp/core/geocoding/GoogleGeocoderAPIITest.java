@@ -30,7 +30,7 @@ public class GoogleGeocoderAPIITest {
 
     @Test
     public void canFindAPostalCode() {
-        String stGeorgesPostalCode = "G5Y";
+        String stGeorgesPostalCode = "G5Y 0A8";
 
         Optional<Coordinates> location = geocoder.lookup(stGeorgesPostalCode);
 
@@ -39,7 +39,7 @@ public class GoogleGeocoderAPIITest {
 
     @Test
     public void cannotFindAnInvalidAddress() {
-        String unexistingAddress = "as-qw-bc-zob-120200";
+        String unexistingAddress = "blpasdadqwdqkdjnak";
 
         Optional<Coordinates> location = geocoder.lookup(unexistingAddress);
 
@@ -56,5 +56,4 @@ public class GoogleGeocoderAPIITest {
         assertThat(latitude).isWithin(threshold).of(expectedLatitude);
         assertThat(longitude).isWithin(threshold).of(expectedLongitude);
     }
-
 }
