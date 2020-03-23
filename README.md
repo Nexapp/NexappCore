@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/Nexapp/NexappCore.svg?branch=master)](https://travis-ci.org/Nexapp/NexappCore)
+[![Maven Central](https://img.shields.io/maven-central/v/ca.nexapp/core)](https://search.maven.org/search?q=ca.nexapp)
 
 # Nexapp Core
 Several Java mini-modules for REST APIs.
@@ -132,19 +133,6 @@ ServiceLocator.reset(); // Clear all registrations
 ```
 
 ## How to use it
-At the moment, this project is hosted on GitHub and not on Maven Central.
-
-In your `pom.xml`, you must add the GitHub repository as follows:
-```
-<repositories>
-	<repository>
-		<id>nexapp-core-mvn-repo</id>
-		<url>https://raw.github.com/nexapp/nexappcore/mvn-repo/</url>
-	</repository>
-</repositories>
-```
-
-Then, you simply add the dependency as follows:
 ```
 <dependency>
 	<groupId>ca.nexapp</groupId>

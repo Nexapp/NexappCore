@@ -1,3 +1,11 @@
 language: java
 notifications:
   email: false
+
+install:
+  - java -Xmx32m -version
+  - javac -J-Xmx32m -version
+  - mvn install -DskipTests -Dmaven.javadoc.skip=true -Dgpg.skip=true -B -V
+
+script:
+  - mvn test -B
