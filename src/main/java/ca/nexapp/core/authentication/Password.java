@@ -1,6 +1,6 @@
 package ca.nexapp.core.authentication;
 
-import java.util.Objects;
+import java.util.Arrays;
 
 import ca.nexapp.core.authentication.hashers.PasswordHasher;
 import ca.nexapp.core.authentication.salts.SaltGenerator;
@@ -31,7 +31,7 @@ public class Password {
 
     @Override
     public int hashCode() {
-        return Objects.hash(hashed, salt);
+        return Arrays.deepHashCode(new Object[]{hashed, salt});
     }
 
     @Override
@@ -41,8 +41,8 @@ public class Password {
         }
 
         Password other = (Password) obj;
-        return Objects.equals(hashed, other.hashed)
-                && Objects.equals(salt, other.salt);
+        return Arrays.equals(hashed, other.hashed)
+                && Arrays.equals(salt, other.salt);
     }
 
     public static Password fromPlaintext(String plaintext, SaltGenerator saltGenerator, PasswordHasher passwordHasher) {
