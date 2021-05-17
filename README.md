@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/Nexapp/NexappCore.svg?branch=master)](https://travis-ci.org/Nexapp/NexappCore)
-
 # Nexapp Core
 Several Java mini-modules for REST APIs.
 
@@ -155,3 +153,22 @@ Then, you simply add the dependency as follows:
 
 ## How to contribute
 In order to run integration tests, you need to request an API key from _Google Maps_, and then set `NEXAPP_CORE_GOOGLE_MAPS_API_KEY` as an environment variable.
+
+### How to deploy a new version
+_This does not bump the version number. The version must be bumped and merged into master previously (in the `pom.xml` and in this `readme`)._
+- You must have write access on the repo
+- Get or create a Github auth token (https://github.com/settings/tokens) with the following scopes `repo, user:email`
+- Configure a name in your Github public profile (anything except blank, it's a requirement of the plugin)
+- Create a `settings.xml` file under `~/.m2/` with the following content:
+  ```xml
+  <servers>
+    <server>
+      <id>github</id>
+      <password>YOUR_GITHUB_AUTH_TOKEN</password>
+    </server>
+  </servers>
+  ```
+- Run `mvn deploy`
+- Celebrate!
+
+_For more details, see https://github.com/github/maven-plugins_
