@@ -30,6 +30,8 @@ public class GoogleGeocoderAPI implements Geocoder {
         if (results.length == 0) {
             return Optional.empty();
         }
+        context.shutdown();
+
         return Optional.ofNullable(results[0].geometry.location);
     }
 
