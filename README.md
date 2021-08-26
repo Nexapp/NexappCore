@@ -161,12 +161,15 @@ _This does not bump the version number. The version must be bumped and merged in
 - Configure a name in your Github public profile (anything except blank, it's a requirement of the plugin)
 - Create a `settings.xml` file under `~/.m2/` with the following content:
   ```xml
-  <servers>
-    <server>
-      <id>github</id>
-      <password>YOUR_GITHUB_AUTH_TOKEN</password>
-    </server>
-  </servers>
+  <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
+    <servers>
+      <server>
+        <id>github</id>
+        <password>YOUR_GITHUB_AUTH_TOKEN</password>
+      </server>
+    </servers>
+  </settings>
   ```
 - Run `mvn deploy`
 - Celebrate!
