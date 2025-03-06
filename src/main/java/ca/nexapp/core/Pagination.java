@@ -1,5 +1,7 @@
 package ca.nexapp.core;
 
+import java.util.Objects;
+
 public class Pagination {
 
     private final int page;
@@ -36,5 +38,17 @@ public class Pagination {
         offset = Math.max(offset, 0);
         int page = offset / itemPerPage + 1;
         return new Pagination(page, itemPerPage, offset);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Pagination that = (Pagination) o;
+        return page == that.page && itemPerPage == that.itemPerPage && offset == that.offset;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(page, itemPerPage, offset);
     }
 }

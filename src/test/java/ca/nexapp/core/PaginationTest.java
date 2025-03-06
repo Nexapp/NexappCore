@@ -93,4 +93,36 @@ public class PaginationTest {
 
         assertThat(results).containsExactly(1, 2, 3).inOrder();
     }
+
+    @Test
+    public void givenTwoPaginationsWithDifferentPage_TheyAreNotEqual() {
+        Pagination a = Pagination.paged(1, 10);
+        Pagination b = Pagination.paged(2, 10);
+
+        assertThat(a).isNotEqualTo(b);
+    }
+
+    @Test
+    public void givenTwoPaginationsWithDifferentItemsPerPage_TheyAreNotEqual() {
+        Pagination a = Pagination.paged(1, 10);
+        Pagination b = Pagination.paged(1, 20);
+
+        assertThat(a).isNotEqualTo(b);
+    }
+
+    @Test
+    public void givenTwoPaginationsWithDifferentOffset_TheyAreNotEqual() {
+        Pagination a = Pagination.offsetted(0, 10);
+        Pagination b = Pagination.offsetted(5, 10);
+
+        assertThat(a).isNotEqualTo(b);
+    }
+
+    @Test
+    public void givenTwoPaginationsWithSamePageItemsPerPageAndOffset_TheyAreEqual() {
+        Pagination a = Pagination.offsetted(0, 10);
+        Pagination b = Pagination.offsetted(0, 10);
+
+        assertThat(a).isEqualTo(b);
+    }
 }
